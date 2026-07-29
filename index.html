@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<!-- PWA / iPhone 主屏支持 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Anna的英语进阶">
+<!-- iOS 主屏图标：相对路径，换任何托管都生效；apple-touch-icon 是 iOS 抓取的主图标 -->
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<meta name="theme-color" content="#6c5ce7">
+<link rel="manifest" href="manifest.json">
+
+<title>Anna的英语进阶</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 移动端顶部栏 + 导航遮罩 -->
+<div class="topbar" id="topbar">
+  <button class="hamburger" id="hamburger" aria-label="打开菜单">☰</button>
+  <div class="topbar-title">📖 Anna的英语进阶</div>
+</div>
+<div class="nav-overlay" id="navOverlay" hidden></div>
+
+<div class="app">
+
+  <!-- ============ 左侧主导航 ============ -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">📖</div>
+      <div class="logo-text"><b>NCE → IELTS</b><span>新概念·雅思单词工作台</span></div>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <button class="nav-item active" data-page="home"><span class="ni">🏠</span>工作台总览</button>
+      <button class="nav-item" data-page="reading"><span class="ni">📚</span>章节阅读区</button>
+      <button class="nav-item" data-page="review"><span class="ni">🔄</span>复习中心<em class="due-badge" id="dueBadge" hidden>0</em></button>
+      <button class="nav-item" data-page="library"><span class="ni">🗃️</span>单词总库</button>
+      <button class="nav-item" data-page="ielts"><span class="ni">🎯</span>雅思专项</button>
+      <button class="nav-item" data-page="dashboard"><span class="ni">📊</span>学习数据看板</button>
+      <button class="nav-item" data-page="settings"><span class="ni">⚙️</span>工作台设置</button>
+      <button class="nav-close" id="navClose" aria-label="关闭菜单">✕ 收起菜单</button>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="mini-btn" id="nightToggle">🌙 夜间护眼</button>
+      <div class="streak-chip" id="streakChip">🔥 连续 0 天</div>
+    </div>
+  </aside>
+
+  <!-- ============ 主内容区 ============ -->
+  <main class="main">
+
+    <!-- 页面0 工作台总览（首页） -->
+    <section class="page active" id="page-home"><div id="homeRoot"></div></section>
+
+    <!-- 页面1 章节阅读区 -->
+    <section class="page" id="page-reading">
+      <div class="reading-layout">
+        <div class="toc-panel">
+          <div class="toc-search"><input id="globalSearch" type="search" placeholder="🔍 全文搜索单词…"></div>
+          <div id="bookTree"></div>
+          <div class="toc-legend">
+            <span><i class="dot dot-core"></i>核心必背</span>
+            <span><i class="dot dot-ext"></i>雅思拓展</span>
+            <span><i class="dot dot-plain"></i>衔接词汇</span>
+          </div>
+        </div>
+        <div class="article-panel" id="articlePanel">
+          <div class="empty-hint">
+            <div class="empty-icon">🗂️</div>
+            <h3>词库分阶段加载中…</h3>
+            <p>点击左侧目录打开章节，系统只渲染当前章节素材以减少内存占用。<br>已完全掌握的单词将自动「休眠」，不再推送复习。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页面2 复习中心 -->
+    <section class="page" id="page-review"><div id="reviewRoot"></div></section>
+
+    <!-- 页面3 单词总库 -->
+    <section class="page" id="page-library"><div id="libraryRoot"></div></section>
+
+    <!-- 页面4 雅思专项 -->
+    <section class="page" id="page-ielts"><div id="ieltsRoot"></div></section>
+
+    <!-- 页面5 学习数据看板 -->
+    <section class="page" id="page-dashboard"><div id="dashRoot"></div></section>
+
+    <!-- 页面6 工作台设置 -->
+    <section class="page" id="page-settings"><div id="settingsRoot"></div></section>
+  </main>
+</div>
+
+<!-- ============ 单词弹窗（六模块固定顺序） ============ -->
+<div class="modal-mask" id="wordModalMask" hidden>
+  <div class="word-modal" id="wordModal"></div>
+</div>
+
+<!-- 复习答题弹窗 -->
+<div class="modal-mask" id="quizModalMask" hidden>
+  <div class="quiz-modal" id="quizModal"></div>
+</div>
+
+<!-- 我的单词（新增/编辑）弹窗 -->
+<div class="modal-mask" id="myWordModalMask" hidden>
+  <div class="myword-modal" id="myWordModal"></div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/extra.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
